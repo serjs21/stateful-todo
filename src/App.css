@@ -1,0 +1,98 @@
+.todo .add-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.todo .add-task {
+    width: 150px;
+    margin: 5px 20px;
+}
+
+.todo .add-task:hover {
+    background: #c4e5ff;
+    border: #96bcff 1px solid;
+}
+
+.task {
+    position: relative;
+}
+
+.task .content {
+    height: 200px;
+    width: calc(100% - 250px);
+    overflow-wrap: break-word;
+}
+
+.task .task-action {
+    top: 5px;
+    position: absolute;
+    width: 100px;
+    height: 25px;
+    border-radius: 3px;
+    transition: all 0.5s;
+}
+
+.task .task-action:focus {
+    outline: none;
+}
+
+.task .edit {
+    right: 30px
+}
+
+.task .complete {
+    right: 140px;
+}
+
+.task.done {
+    background: #edf2f5;
+    color: #808080c2;
+}
+
+.task.display {
+    padding: 16px
+}
+
+.ant-collapse-content.ant-collapse-content-active .ant-collapse-content-box{
+    padding: 0;
+}
+
+.task .task-action:hover {
+    background: #c4e5ff;
+    border: #96bcff 1px solid;
+}
+
+.task .textarea {
+    height: 200px;
+    width: calc(100% - 250px);
+    margin-top: -5px;
+    margin-left: -8px;
+}
+
+.task-header {
+    display: flex;
+    padding: 12px 0 12px 40px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.task-header.done {
+    background: #dae8ef;
+    color: #808080c2;
+}
+
+.task-header .checkbox {
+    margin: 0 10%;
+}
+
+.todo .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 0;
+}
+
+.new-task .new-title {
+    margin-bottom: 20px;
+}
+
+.new-task .new-content {
+    height: 200px;
+}
