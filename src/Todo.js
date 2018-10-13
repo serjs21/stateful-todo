@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 import List from './components/List/list';
 import {Button, Modal, Input} from 'antd';
-
+import {observer} from 'mobx-react';
 import './App.css';
 import 'antd/dist/antd.css'
 
 const {TextArea} = Input;
 
-const dataMock = {
-    0: {title: 'First Task', content: 'Details of first Task', id: 0, done: true},
-    1: {title: 'Second Task', content: 'Details of second Task', id: 1}
-};
-
+@observer
 export default class Todo extends Component {
     constructor(props) {
         super(props);
@@ -19,8 +15,6 @@ export default class Todo extends Component {
             addingTask: false,
             newTaskContent: '',
             newTaskTitle: '',
-            tasks: dataMock,
-            idx: 2,
         }
     }
 
@@ -43,17 +37,7 @@ export default class Todo extends Component {
     };
 
     handleAdd = () => {
-        this.setState((state) => ({
-                tasks: Object.assign(state.tasks, {
-                    [state.idx]: {
-                        id: state.idx,
-                        title: state.newTaskTitle,
-                        content: state.newTaskContent,
-                    }
-                }),
-                idx: state.idx + 1,
-            })
-        );
+        this.props.store.addTask(this.state.newTaskTitle, this.state.newTaskContent);
         this.handleClose();
     };
 
@@ -69,10 +53,11 @@ export default class Todo extends Component {
     render() {
         return (
             <div className='todo'>
+                <div className='counter'>{`Tasks Left: ${this.props.store.todoTasks} / ${this.props.store.tasksCount}`}</div>
                 <div className='add-wrapper'>
                     <Button size='small' onClick={this.openAddModal} icon='plus-square' className='add-task'/>
                 </div>
-                <List tasks={Object.values(this.state.tasks)}/>
+                <List tasks={this.props.store.tasks}/>
                 <Modal
                     title="Add New Task"
                     visible={this.state.addingTask}

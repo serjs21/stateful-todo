@@ -44,6 +44,13 @@
     right: 140px;
 }
 
+.task .delete {
+     top: 40px;
+     right: 30px;
+     width: 210px;
+     background: #fff1fd;
+}
+
 .task.done {
     background: #edf2f5;
     color: #808080c2;
@@ -60,6 +67,12 @@
 .task .task-action:hover {
     background: #c4e5ff;
     border: #96bcff 1px solid;
+}
+
+.task .delete:hover {
+    background: #ffb2b5;
+    border: #ffa7a9 1px solid;
+    color: #ff2525;
 }
 
 .task .textarea {

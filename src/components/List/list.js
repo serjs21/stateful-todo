@@ -2,9 +2,21 @@ import React, {Component} from 'react';
 import Task from '../Task/task';
 import {Collapse, Checkbox} from 'antd';
 import PropTypes from 'prop-types';
+import store from '../../store';
 
 export default class List extends Component {
-    getHeader = task => <span className={`task-header ${task.done ? 'done': 'not-done'}`}>{task.title} <Checkbox className='checkbox' checked={task.done} disabled={task.done}/></span>;
+    getToggleTaskCompleteFunction = (id) => () => store.toggleTaskComplete(id);
+    getToggleCheckboxCompleteFunction = (id) => (event) => {
+        event.stopPropagation();
+        store.toggleTaskComplete(id);
+    };
+
+    getHeader = task => <span className={`task-header ${task.done ? 'done' : 'not-done'}`}>
+        {task.title}
+        <Checkbox className='checkbox'
+                  checked={task.done}
+                  onClick={this.getToggleCheckboxCompleteFunction(task.id)}/>
+    </span>;
 
 
     render() {
@@ -12,7 +24,11 @@ export default class List extends Component {
             <Collapse accordion={true}>
                 {Object.values(this.props.tasks).map(task => <Collapse.Panel header={this.getHeader(task)}
                                                                              key={task.id}>
-                    <Task content={task.content} done={task.done} key={`${task.id}-content`}/></Collapse.Panel>)}
+                    <Task content={task.content}
+                          toggleTaskComplete={this.getToggleTaskCompleteFunction(task.id)}
+                          done={task.done}
+                          id={task.id}
+                          key={`${task.id}-content`}/></Collapse.Panel>)}
             </Collapse>
         );
     }
